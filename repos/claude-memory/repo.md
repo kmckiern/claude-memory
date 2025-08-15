@@ -3,22 +3,69 @@
 ## Project Overview
 - **Purpose**: Central memory system for Claude Code development patterns and project-specific context
 - **Architecture**: Source files + automation to generate combined CLAUDE.md files
+- **Key Features**: Global patterns, project templates, automated memory synchronization
 
 ## Technical Environment
-- **Build**: Python 3 scripts for automation
-- **Testing**: Manual verification of generated files
-- **Pre-commit**: Auto-generates CLAUDE.md files when source content changes
 
-## Key Components
-- **Global patterns**: Universal development workflow and rules
-- **Project templates**: Reusable formats for new repositories
-- **Automation**: Pre-commit hooks ensure files stay in sync
+### Build System
+- **Build Tool**: Python 3 scripts
+- **Package Management**: Standard Python (no special requirements)
+- **Installation**: Direct execution of generation scripts
 
-## Recent Changes
-- Created structured memory system with global + repo-specific content
-- Added pre-commit automation for CLAUDE.md generation
-- Trimmed content to focus on essential workflow information
+### Development Environment
+- **Virtual Environment**: Use `.venv` in root directory
+- **Common Issues**: "pip is disabled in base environment" → `conda deactivate && source .venv/bin/activate`
+- **Dependencies**: Python 3 standard library only
 
-## Troubleshooting
+### Testing Framework
+- **Test Runner**: Manual verification of generated files
+- **Special Requirements**: Verify CLAUDE.md generation accuracy
+- **Coverage Expectations**: All source changes must trigger regeneration
+
+### Code Quality Tools
+- **Linting**: Follow existing Python conventions
+- **Type Checking**: Not required for this project
+- **Formatting**: Standard Python formatting
+
+## Project-Specific Patterns
+
+### Memory Management Philosophy (CRITICAL)
+**When processing information for memory incorporation:**
+- **Prioritize by significance** - distinguish trivial details from critical insights
+- **Weight by importance** - emphasize key patterns, escalate essential learnings
+- **Maintain brevity** - avoid bloat, focus on actionable information
+- **Integrate holistically** - consider broader context, rework entire files when needed
+- **Structure reflects priority** - most important information comes first
+
+### Code Conventions
+- Edit source files in `repos/` and `global/` directories only
+- Never edit generated CLAUDE.md files directly
+- Follow template structures for consistency
+
+### Common Workflows
+- **Memory updates**: Edit source files, commit triggers auto-generation
+- **Manual generation**: Run `python3 tools/generate-claude-md.py` when hooks fail
+- **Template updates**: Modify templates then regenerate all files
+
+## Recent Context
+
+### Active Branches
+- `session-insights`: Current working branch
+- Focus on memory management improvements
+
+### Recent Issues & Solutions
+- Established priority-based memory processing principles
+- Restructured memory files to emphasize significance over chronology
+- Integrated memory philosophy into development workflow
+
+## Troubleshooting Guide
+
+### Common Errors
 - **Hook not running**: Check `.git/hooks/pre-commit` is executable
 - **Generation fails**: Run `python3 tools/generate-claude-md.py` manually to debug
+- **Template inconsistencies**: Verify source files follow template structure
+
+### Debug Strategies
+- Manual script execution reveals generation errors
+- Check file permissions on hook scripts
+- Verify template integrity before bulk regeneration
