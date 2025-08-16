@@ -11,7 +11,6 @@
 ### Non-Obvious Patterns
 
 - **Dual client architecture**: AsyncMandoline and Mandoline serve different use cases - not just async/sync variants but fundamentally different operation models
-- **Context manager complexity**: AsyncMandoline context protocol requires careful instantiation patterns that differ from typical async context managers
 - **HTTP-level mocking necessity**: Async testing requires understanding complete call chains, not just method-level mocking
 
 ### Domain Complexity
@@ -23,7 +22,6 @@
 ### Development Challenges
 
 - **Async test mocking complexity**: Complete call chain understanding needed for effective testing
-- **Context manager protocol**: AsyncMandoline requires non-standard instantiation patterns
 - **Performance vs. simplicity trade-off**: Dual clients address different user needs and technical constraints
 
 ## Performance & Debugging
@@ -36,7 +34,6 @@
 
 ### Debugging Complexity
 
-- **Async context manager pitfalls**: AsyncMandoline requires direct instantiation, not standard `async with` patterns
 - **HTTP-level mocking requirements**: Testing must mock at API level, not method level, due to complex async call chains
 - **Tutorial vs. development environment gaps**: Real user scenarios require different testing approaches than dev environment assumptions
 
@@ -45,7 +42,6 @@
 ### Key Learnings
 
 - **v0.5.0 insight**: Async test mocking complexity revealed need for complete call chain understanding
-- **Context manager protocol discovery**: Standard async patterns don't apply to AsyncMandoline instantiation
 - **Performance validation**: Concurrent batch operations provide measurable performance improvements
 
 ### Evolution & Trade-offs
