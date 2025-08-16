@@ -1,18 +1,51 @@
 # mandoline-python Repository Memory
 
 ## Project Overview
+
 - **Purpose**: Python client for Mandoline LLM evaluation platform
-- **Architecture**: Dual client system - AsyncMandoline (concurrent), Mandoline (sync)
+- **Architecture**: Dual client system - AsyncMandoline (true concurrency), Mandoline (sync simplicity)
+- **Key Features**: Concurrent batch operations, context-aware client management
 
-## Technical Environment
-- **Build**: hatch, `pip install -e .[dev]`
-- **Testing**: pytest + `pytest-asyncio`
-- **Key pattern**: Async mocking requires HTTP-level mocking
+## Critical Insights
 
-## Recent Changes
-- **v0.5.0**: Added AsyncMandoline client with true concurrent batch operations
-- **Key Issue**: Async test mocking requires understanding complete call chains
+### Non-Obvious Patterns
 
-## Troubleshooting
-- **Async context errors**: AsyncMandoline context manager protocol
-- **Tutorial testing**: Should reflect real user experience, not dev environment
+- **Dual client architecture**: AsyncMandoline and Mandoline serve different use cases - not just async/sync variants but fundamentally different operation models
+- **HTTP-level mocking necessity**: Async testing requires understanding complete call chains, not just method-level mocking
+
+### Domain Complexity
+
+- **Concurrent batch operations**: True concurrency for performance vs. sequential operations for simplicity
+- **LLM evaluation platform integration**: Client must handle rate limits, connection pooling, and evaluation-specific response patterns
+- **Tutorial vs. dev environment gap**: Real user experience requires different testing approaches than development environment
+
+### Development Challenges
+
+- **Async test mocking complexity**: Complete call chain understanding needed for effective testing
+- **Performance vs. simplicity trade-off**: Dual clients address different user needs and technical constraints
+
+## Performance & Debugging
+
+### Critical Performance Insights
+
+- **True concurrency benefit**: AsyncMandoline provides dramatic speedup through simultaneous API requests vs. sequential calls
+- **Connection pooling efficiency**: Rate limits handled through client connection management rather than request-level throttling
+- **Batch operation optimization**: Reduces API call overhead through intelligent request grouping
+
+### Debugging Complexity
+
+- **HTTP-level mocking requirements**: Testing must mock at API level, not method level, due to complex async call chains
+- **Tutorial vs. development environment gaps**: Real user scenarios require different testing approaches than dev environment assumptions
+
+## Recent Context
+
+### Key Learnings
+
+- **v0.5.0 insight**: Async test mocking complexity revealed need for complete call chain understanding
+- **Performance validation**: Concurrent batch operations provide measurable performance improvements
+
+### Evolution & Trade-offs
+
+- **Trade-off**: Complexity vs. performance - AsyncMandoline adds complexity for significant speed gains
+- **Evolution**: From single sync client to dual architecture addressing different user needs
+- **Breaking change**: v0.5.0 introduced async patterns requiring new testing approaches
