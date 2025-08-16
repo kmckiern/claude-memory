@@ -13,19 +13,12 @@
 - **Installation**: `pip install -e .[dev]`
 
 ### Development Environment
-- **Virtual Environment**: Use `.venv` in root directory
-- **Common Issues**: AsyncMandoline client instantiation (no context manager support)
 - **Dependencies**: mandoline>=0.5.0, asyncio for concurrent evaluation
-
-### Testing Framework
-- **Test Runner**: pytest, standard patterns
-- **Special Requirements**: Async testing patterns, HTTP-level mocking
-- **Coverage Expectations**: Test evaluation logic and git operations
+- **Common Issues**: AsyncMandoline client instantiation (no context manager support)
 
 ### Code Quality Tools
 - **Linting**: `black code_evals/`, `flake8 code_evals/`
 - **Type Checking**: `mypy code_evals/`
-- **Formatting**: black (standard Python formatting)
 
 ## Project-Specific Patterns
 

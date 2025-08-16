@@ -6,26 +6,10 @@
 - **Key Features**: Global patterns, project templates, automated memory synchronization
 
 ## Technical Environment
-
-### Build System
-- **Build Tool**: Python 3 scripts
-- **Package Management**: Standard Python (no special requirements)
-- **Installation**: Direct execution of generation scripts
-
-### Development Environment
-- **Virtual Environment**: Use `.venv` in root directory
-- **Common Issues**: "pip is disabled in base environment" → `conda deactivate && source .venv/bin/activate`
+- **Build Tool**: Python 3 scripts (no special requirements)
 - **Dependencies**: Python 3 standard library only
-
-### Testing Framework
-- **Test Runner**: Manual verification of generated files
-- **Special Requirements**: Verify CLAUDE.md generation accuracy
-- **Coverage Expectations**: All source changes must trigger regeneration
-
-### Code Quality Tools
-- **Linting**: Follow existing Python conventions
-- **Type Checking**: Not required for this project
-- **Formatting**: Standard Python formatting
+- **Testing**: Manual verification of generated files
+- **Code Quality**: Follow existing Python conventions
 
 ## Project-Specific Patterns
 

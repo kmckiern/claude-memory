@@ -6,8 +6,7 @@
 
 ## Technical Environment
 - **Build**: hatch, `pip install -e .[dev]`
-- **Testing**: pytest + `pytest-asyncio`
-- **Key pattern**: Async mocking requires HTTP-level mocking
+- **Testing**: pytest + `pytest-asyncio`, async mocking requires HTTP-level mocking
 
 ## Recent Changes
 - **v0.5.0**: Added AsyncMandoline client with true concurrent batch operations
