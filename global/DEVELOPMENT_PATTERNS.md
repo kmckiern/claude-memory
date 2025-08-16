@@ -10,6 +10,14 @@
 - **Branch naming**: Branch name must match spec file name exactly
 - **Session logging**: Document in `.claude-code-sessions/[branch-name].md` incrementally
 
+### Session Logging (Critical Understanding)
+
+- **Purpose**: Real-time decision journal capturing reasoning as work progresses, NOT final documentation
+- **Common misunderstanding**: Treating as project documentation written at beginning/end vs. live thought process
+- **Correct approach**: Update after each significant decision/action, capturing actual reasoning in the moment
+- **Critical insight**: Session logs document WHY decisions were made when they were made, not just WHAT was done
+- **Anti-pattern**: Batch updating at end of session - this loses the decision-making context that makes logs valuable
+
 ## Essential Rules
 
 ### Git Practices
