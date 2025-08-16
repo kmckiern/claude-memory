@@ -24,6 +24,8 @@
 
 - **Atomic commits required**: Each logical step committed separately (spec → investigation → implementation → fixes)
 - **Critical for evaluation systems**: Atomic commits enable visibility into decision-making process for agentic evaluation
+- **Commit trigger rule**: Any conceptual block or significant decision requires session log update + immediate commit
+- **Why this matters**: Decision-making process must be traceable through git history, not just final outcomes
 
 ### Code Standards
 
