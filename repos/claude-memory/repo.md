@@ -3,106 +3,53 @@
 ## Project Overview
 
 - **Purpose**: Central memory system for Claude Code development patterns and project-specific context
-- **Architecture**: Source files + automation to generate combined CLAUDE.md files
+- **Architecture**: Source files + automation to generate combined CLAUDE.md files with priority-weighted information
 - **Key Features**: Global patterns, project templates, automated memory synchronization
 
-## Technical Environment
+## Critical Insights
 
-### Build System
+### Non-Obvious Patterns
 
-- **Build Tool**: Python 3 scripts (no special requirements)
-- **Package Management**: Standard Python
-- **Installation**: Direct execution of generation scripts
+- **Source-only editing**: Never edit generated CLAUDE.md files directly - they're completely regenerated from source files
+- **Priority-weighted architecture**: Information structure reflects significance, not chronology
+- **Holistic integration**: Changes consider broader context, often requiring entire file rework rather than incremental updates
 
-### Development Environment
+### Domain Complexity
 
-- **Dependencies**: Python 3 standard library only
-- **Common Issues**: Verify template integrity before bulk regeneration
+- **Memory Management Philosophy**: Distinguish trivial details from critical insights, weight by importance, maintain brevity while integrating holistically
+- **Template-driven generation**: Consistent structure across projects through template inheritance
+- **Automated synchronization**: Git hooks trigger regeneration to keep memory files current
 
-### Testing Framework
+### Development Challenges
 
-- **Test Runner**: Manual verification of generated files
-- **Special Requirements**: Verify CLAUDE.md generation accuracy
-- **Coverage Expectations**: All source changes must trigger regeneration
+- **Information overload prevention**: Constant tension between completeness and brevity
+- **Significance assessment**: Determining what deserves memory vs. what can be discovered
+- **Context integration**: Balancing project-specific details with global patterns
 
-### Code Quality Tools
+## Performance & Debugging
 
-- **Linting**: Follow existing Python conventions
-- **Type Checking**: Not required for this project
-- **Formatting**: Standard Python formatting
+### Critical Performance Insights
 
-## Project-Specific Patterns
+- **Memory structure optimization**: Most significant information prioritized first to reduce cognitive load
+- **Automated generation efficiency**: Reduces manual memory maintenance overhead through template-driven approach
+- **Information density**: Balancing completeness with brevity to prevent cognitive overload
 
-### Memory Management Philosophy (CRITICAL)
+### Debugging Complexity
 
-**When processing information for memory incorporation:**
-
-- **Prioritize by significance** - distinguish trivial details from critical insights
-- **Weight by importance** - emphasize key patterns, escalate essential learnings
-- **Maintain brevity** - avoid bloat, focus on actionable information
-- **Integrate holistically** - consider broader context, rework entire files when needed
-- **Structure reflects priority** - most important information comes first
-
-### Code Conventions
-
-- Edit source files in `repos/` and `global/` directories only
-- Never edit generated CLAUDE.md files directly
-- Follow template structures for consistency
-
-### Common Workflows
-
-- **Memory updates**: Edit source files, commit triggers auto-generation
-- **Manual generation**: Run `python3 tools/generate-claude-md.py` when hooks fail
-- **Template updates**: Modify templates then regenerate all files
+- **Template inconsistencies**: Source files must follow template structure exactly or generation fails
+- **Hook dependencies**: Pre-commit hook failures require manual generation debugging
+- **Context integration challenges**: Changes often require holistic file rework rather than simple additions
 
 ## Recent Context
 
-### Active Branches
+### Key Learnings
 
-- `session-insights`: Current working branch
-- Focus on memory management improvements
+- Established priority-based memory processing principles as core philosophy
+- Discovered that chronological organization creates cognitive overhead vs. significance-based structure
+- Template adherence critical for consistent cross-project memory management
 
-### Recent Issues & Solutions
+### Evolution & Trade-offs
 
-- Established priority-based memory processing principles
-- Restructured memory files to emphasize significance over chronology
-- Integrated memory philosophy into development workflow
-
-## Domain Knowledge
-
-### Business Logic
-
-- **Core Concept**: Centralized memory management for development patterns across projects
-- **Process**: Source files → automation → combined CLAUDE.md files
-- **Key Algorithm**: Template-based generation with priority-weighted information
-
-### Performance Considerations
-
-- **Optimization**: Memory files structured to prioritize most significant information first
-- **Efficiency**: Automated generation reduces manual memory maintenance overhead
-
-## External Dependencies
-
-### Key Libraries
-
-- **Python 3 standard library**: File operations, text processing
-- **Git hooks**: Automated regeneration on commits
-
-### Services & APIs
-
-- **Local file system**: Source and generated file storage
-- **Git integration**: Pre-commit hook triggers
-
-## Troubleshooting Guide
-
-### Common Errors
-
-- **Hook not running**: Check `.git/hooks/pre-commit` is executable
-- **Generation fails**: Run `python3 tools/generate-claude-md.py` manually to debug
-- **Template inconsistencies**: Verify source files follow template structure
-
-### Debug Strategies
-
-- Manual script execution reveals generation errors
-- Check file permissions on hook scripts
-- Verify template integrity before bulk regeneration
+- **Trade-off**: Automated generation vs. manual control - chose automation for consistency
+- **Evolution**: From chronological to significance-based information architecture
+- **Breaking change**: Template structure now enforced, requiring all repos to conform

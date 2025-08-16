@@ -3,127 +3,56 @@
 ## Project Overview
 
 - **Purpose**: CLI tool that evaluates code changes against specifications using Mandoline AI
-- **Architecture**: Simple linear pipeline: config → spec → git analysis → evaluation → output
+- **Architecture**: Linear pipeline with concurrent evaluation: config → spec → git analysis → parallel evaluation → output
 - **Key Features**: Concurrent evaluation, merge commit handling, spec-based assessment
 
-## Technical Environment
+## Critical Insights
 
-### Build System
+### Non-Obvious Patterns
 
-- **Build Tool**: setuptools
-- **Package Management**: pip
-- **Installation**: `pip install -e .[dev]`
+- **Spec exclusion from diffs**: Specifications themselves must be excluded from evaluation diffs to prevent circular evaluation
+- **Merge commit detection**: GitHub PR workflow creates temporary merge commits not visible locally, requiring special head/base selection logic
+- **Concurrent evaluation architecture**: `asyncio.gather()` provides dramatic speedup through simultaneous API requests vs. sequential evaluation
 
-### Development Environment
+### Domain Complexity
 
-- **Dependencies**: mandoline>=0.5.0, asyncio for concurrent evaluation
-- **Common Issues**: AsyncMandoline client instantiation (no context manager support)
+- **Self-referential evaluation paradox**: Features that change evaluation behavior create circular evaluation issues during development
+- **Git commit history complexity**: CI sees different commit history than local development, requiring robust merge commit detection
+- **Evaluation context boundaries**: Related code discovery gap can miss relevant context not directly edited
 
-### Code Quality Tools
+### Development Challenges
 
-- **Linting**: `black code_evals/`, `flake8 code_evals/`
-- **Type Checking**: `mypy code_evals/`
+- **Ship of Theseus problem**: Modifying evaluation while being evaluated requires accepting inconsistency during transitions
+- **Related code discovery gap**: Static analysis needed to find relevant code not directly modified
+- **AsyncMandoline integration**: Context manager protocol differences require direct instantiation patterns
 
-## Project-Specific Patterns
+## Performance & Debugging
 
-### Code Conventions
+### Critical Performance Insights
 
-- Follow async/await patterns for concurrent operations
-- Use `asyncio.gather()` for batch processing
-- Atomic operations in git analysis
+- **Concurrent evaluation bottleneck**: Sequential API calls were primary bottleneck, solved with `asyncio.gather()` providing dramatic speedup
+- **Resource efficiency optimization**: Better API utilization through simultaneous requests vs. sequential processing
+- **Git analysis optimization**: Atomic operations in git analysis prevent incomplete state issues
 
-### Testing Patterns
+### Debugging Complexity
 
-- Mock HTTP requests at API level for Mandoline integration
-- Test merge commit scenarios specifically
-- Verify concurrent operation behavior
-
-### Common Workflows
-
-- Spec-driven evaluation: spec file → git analysis → concurrent metric evaluation → results
-- Debug with verbose mode to verify concurrent operations
-- Manual testing: `code-evals --spec [spec-file] --verbose`
+- **Merge commit detection challenges**: GitHub PR workflow creates temporary merge commits invisible locally, requiring verbose mode to debug commit selection
+- **Self-referential evaluation debugging**: Features that change evaluation behavior create circular issues during development
+- **AsyncMandoline context debugging**: Standard async patterns don't work - requires direct instantiation debugging
+- **Empty diffs in CI**: Merge commit detection logic often fails, requiring git analysis verification
 
 ## Recent Context
 
-### Active Branches
+### Key Learnings
 
-- Main development on main branch
-- Recent focus: merge commit handling, async performance optimization
+- **Merge commit bug discovery**: CI merge commit evaluation causing "No changes detected" revealed fundamental git analysis complexity
+- **Performance breakthrough**: AsyncMandoline 0.5.0 integration provided dramatic concurrent evaluation speedup
+- **Code duplication prevention**: Reusing `spec_ops.discover_spec_path()` avoided custom helper duplication
+- **Related code discovery gap**: Evaluation context misses related code not directly edited
 
-### Recent Issues & Solutions
+### Evolution & Trade-offs
 
-- **Merge Commit Bug**: Fixed CI merge commit evaluation causing "No changes detected" errors
-- **Performance**: Integrated AsyncMandoline 0.5.0 for concurrent evaluation (dramatic speedup)
-- **AsyncMandoline Context**: Fixed context manager protocol issues
-- **Code Duplication**: Avoided by reusing `spec_ops.discover_spec_path()` instead of custom helpers
-
-### Version History
-
-- **v0.5.0**: Integrated AsyncMandoline client for concurrent evaluation
-- **Key Breaking Change**: Requires mandoline>=0.5.0, async patterns throughout
-
-## Domain Knowledge
-
-### Business Logic
-
-- **Core Concept**: Evaluate code changes against written specifications using AI
-- **Evaluation Process**: Extract git changes, exclude specs from diffs, concurrent metric assessment
-- **Key Algorithm**: Merge commit detection and proper head/base selection for accurate diffs
-
-### Performance Considerations
-
-- **Bottleneck**: Sequential API calls to Mandoline (solved with async)
-- **Optimization**: Concurrent evaluation using `asyncio.gather()` provides dramatic speedup
-- **Resource Efficiency**: Better API utilization through simultaneous requests
-
-## External Dependencies
-
-### Key Libraries
-
-- **mandoline>=0.5.0**: Core evaluation engine with async client
-- **asyncio**: Concurrent evaluation processing
-- **GitPython**: Git repository analysis and diff generation
-
-### Services & APIs
-
-- **Mandoline API**: AI-powered code evaluation service
-- **Rate Limits**: Handled through async client connection pooling
-- **Error Handling**: Graceful degradation for network/API failures
-
-## Development Challenges
-
-### Self-Referential Evaluation
-
-- **Challenge**: Features that change evaluation behavior create circular evaluation issues
-- **Example**: Spec exclusion feature evaluated with spec in diff during development
-- **Philosophy**: "Ship of Theseus" problem - modifying evaluation while being evaluated
-- **Approach**: Accept inconsistency during transition, enforce consistency post-deployment
-
-### Related Code Discovery Gap
-
-- **Issue**: Evaluation context may miss related code not directly edited
-- **Impact**: Can lead to code duplication when existing functionality isn't discovered
-- **Example**: `spec_ops` module missed during evaluation despite being related
-- **Future Scope**: Static analysis, import graph traversal, semantic similarity needed
-
-## Troubleshooting Guide
-
-### Common Errors
-
-- **"No changes detected"**: Usually merge commit evaluation bug (fixed in git_ops.py:extract_changes)
-- **AsyncMandoline context errors**: Don't use `async with` - instantiate directly
-- **Empty diffs in CI**: Check merge commit detection logic
-
-### Debug Strategies
-
-- **Verbose mode**: Use `--verbose` to verify concurrent operations and commit selection
-- **Merge commit debugging**: Check logs for commit parent detection
-- **Performance verification**: Look for concurrent HTTP requests in debug output
-- **Git analysis**: Verify base/head commit selection in verbose logs
-
-### CI/GitHub Integration
-
-- **Temporary Merge Commits**: GitHub PR workflow creates commits not visible locally
-- **Different Commit History**: CI sees different history than local development environment
-- **Infrastructure Dependencies**: Changes require understanding entire CI/eval pipeline
+- **Trade-off**: Self-referential evaluation consistency vs. development velocity - accepted inconsistency during transitions
+- **Evolution**: From sequential to concurrent evaluation architecture for performance
+- **Breaking change**: v0.5.0 requires mandoline>=0.5.0, async patterns throughout
+- **Philosophy**: "Ship of Theseus" approach to modifying evaluation while being evaluated
