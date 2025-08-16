@@ -8,10 +8,28 @@
 
 ## Technical Environment
 
+### Build System
+
 - **Build Tool**: Python 3 scripts (no special requirements)
+- **Package Management**: Standard Python
+- **Installation**: Direct execution of generation scripts
+
+### Development Environment
+
 - **Dependencies**: Python 3 standard library only
-- **Testing**: Manual verification of generated files
-- **Code Quality**: Follow existing Python conventions
+- **Common Issues**: Verify template integrity before bulk regeneration
+
+### Testing Framework
+
+- **Test Runner**: Manual verification of generated files
+- **Special Requirements**: Verify CLAUDE.md generation accuracy
+- **Coverage Expectations**: All source changes must trigger regeneration
+
+### Code Quality Tools
+
+- **Linting**: Follow existing Python conventions
+- **Type Checking**: Not required for this project
+- **Formatting**: Standard Python formatting
 
 ## Project-Specific Patterns
 
@@ -49,6 +67,31 @@
 - Established priority-based memory processing principles
 - Restructured memory files to emphasize significance over chronology
 - Integrated memory philosophy into development workflow
+
+## Domain Knowledge
+
+### Business Logic
+
+- **Core Concept**: Centralized memory management for development patterns across projects
+- **Process**: Source files → automation → combined CLAUDE.md files
+- **Key Algorithm**: Template-based generation with priority-weighted information
+
+### Performance Considerations
+
+- **Optimization**: Memory files structured to prioritize most significant information first
+- **Efficiency**: Automated generation reduces manual memory maintenance overhead
+
+## External Dependencies
+
+### Key Libraries
+
+- **Python 3 standard library**: File operations, text processing
+- **Git hooks**: Automated regeneration on commits
+
+### Services & APIs
+
+- **Local file system**: Source and generated file storage
+- **Git integration**: Pre-commit hook triggers
 
 ## Troubleshooting Guide
 
