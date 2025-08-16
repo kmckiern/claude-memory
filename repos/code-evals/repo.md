@@ -16,6 +16,8 @@
 
 ### Domain Complexity
 
+- **Specification adherence validation**: Evaluates whether code changes match written specifications using AI analysis rather than mechanical rule checking
+- **Natural language evaluation**: Uses AI to assess code against human-written requirements instead of relying solely on automated syntax/type checking
 - **Self-referential evaluation paradox**: Features that change evaluation behavior create circular evaluation issues during development
 - **Git commit history complexity**: CI sees different commit history than local development, requiring robust merge commit detection
 - **Evaluation context boundaries**: Related code discovery gap can miss relevant context not directly edited

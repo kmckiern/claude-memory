@@ -17,8 +17,10 @@
 ### Domain Complexity
 
 - **Memory Management Philosophy**: Distinguish trivial details from critical insights, weight by importance, maintain brevity while integrating holistically
+- **Knowledge capture criteria**: Focus on insights requiring significant time to understand from code alone, excluding information immediately discoverable from configuration files or basic exploration
 - **Template-driven generation**: Consistent structure across projects through template inheritance
 - **Automated synchronization**: Git hooks trigger regeneration to keep memory files current
+- **AI development infrastructure**: Functions as recursive configuration system for AI-assisted development, analogous to bashrc for shell environments
 
 ### Development Challenges
 
